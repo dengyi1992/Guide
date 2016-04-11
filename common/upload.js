@@ -10,7 +10,7 @@ conn.connect();
 
 exports.upload = function (req, res, next) {
     /* 上传页面 */
-    res.sendFile(config.upload.path + "upload.html");
+    res.sendFile(config.upload.path_uploadpage + "upload.html");
 
 
 };
