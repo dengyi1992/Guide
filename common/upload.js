@@ -18,19 +18,22 @@ exports.upload = function (req, res, next) {
 exports.uploadfile = function (req, res, next) {
     console.log(req.body, req.files);
     var des_file = config.upload.path + req.files.userPhoto.originalFilename
-    fs.readFile(req.files.userPhoto.path + "", function (err, data) {
+    fs.readFile(req.files.userPhoto.path, function (err, data) {
         fs.writeFile(des_file, data, function (err) {
             var response;
             if (err) {
                 console.log(err);
+                res.end(JSON.stringify(err));
+
             } else {
                 response = {
                     message: 'File uploaded successfully',
                     filename: config.upload.url + req.files.userPhoto.originalFilename
                 };
+                console.log(response);
+                res.end(JSON.stringify(response));
+
             }
-            console.log(response);
-            res.end(JSON.stringify(response));
         });
     });
 
