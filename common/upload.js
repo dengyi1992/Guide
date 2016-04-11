@@ -28,7 +28,7 @@ exports.uploadfile = function (req, res, next) {
             } else {
                 response = {
                     message: 'File uploaded successfully',
-                    filename: config.upload.url + req.files.userPhoto.originalFilename
+                    filename: config.url+config.upload.url + req.files.userPhoto.originalFilename
                 };
                 console.log(response);
                 res.end(JSON.stringify(response));

@@ -3,6 +3,7 @@ var upload =require('../common/upload');
 var router = express.Router();
 /**
  * post上传文件必须
+ * 并且要注意是否有相关的文件夹
  */
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
