@@ -3,6 +3,7 @@ var util = require('util');
 var mysql = require('mysql');
 var http = require('http');
 var fs = require('fs');
+var bodyParser = require('body-parser');
 var config = require('../config.js');
 var conn = mysql.createConnection(config.database_info);
 conn.connect();
