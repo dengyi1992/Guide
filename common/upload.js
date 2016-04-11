@@ -30,7 +30,7 @@ exports.uploadfile = function (req, res, next) {
             } else {
                 response = {
                     message: 'File uploaded successfully',
-                    filename: config.url+config.upload.url + s
+                    filename: config.url+'/upload/'+ s
                 };
                 console.log(response);
                 res.end(JSON.stringify(response));

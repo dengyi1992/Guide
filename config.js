@@ -71,7 +71,7 @@ var config = {
         path_uploadpage: path.join(__dirname, 'public/'),
         url: '/public/upload/'
     },
-    url:'http://119.29.191.229',
+    url:'http://119.29.191.229:2888',
 
     file_limit: '1MB',
 
