@@ -17,8 +17,10 @@ exports.upload = function (req, res, next) {
 
 exports.uploadfile = function (req, res, next) {
     console.log(req.body, req.files);
-    var des_file = config.upload.path + req.files.userPhoto.originalFilename
-    fs.readFile(req.files.userPhoto.path, function (err, data) {
+    var path = req.files.userPhoto.path;
+    var s = path.substring(5,path.length);
+    var des_file = config.upload.path + s;
+    fs.readFile(path, function (err, data) {
         fs.writeFile(des_file, data, function (err) {
             var response;
             if (err) {
@@ -28,7 +30,7 @@ exports.uploadfile = function (req, res, next) {
             } else {
                 response = {
                     message: 'File uploaded successfully',
-                    filename: config.url+config.upload.url + req.files.userPhoto.originalFilename
+                    filename: config.url+config.upload.url + s
                 };
                 console.log(response);
                 res.end(JSON.stringify(response));
