@@ -83,7 +83,7 @@ exports.login = function (req, res, next) {
             return res.json({msg: 'error', content: '用户名或密码错误'});
         }
         if (rows.length >= 1) {
-            return res.json({msg: 'success', content: '登录成功'});
+            return res.json({msg: 'success',name: loginname, content: '登录成功'});
 
         } else {
             ep.emit('login_error')
