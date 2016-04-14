@@ -20,7 +20,6 @@ exports.signup = function (req, res, next) {
     var ep = new eventproxy();
     ep.fail(next);
     ep.on('prop_err', function (msg) {
-        res.status(422);
         res.json({error: msg, loginname: loginname, email: email});
     });
 
