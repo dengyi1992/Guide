@@ -11,7 +11,13 @@ conn.connect();
 
 
 exports.try = function (req, res, next) {
-    var file = config.upload.path_uploadpage + "a.json";
+    var file;
+    if (req.query.file==undefined){
+        file = config.upload.path_uploadpage + "a.json";
+    }else {
+        file = config.upload.path_uploadpage + req.query.file+".json";
+    }
+
     fs.readFile(file, function (err, data) {
         if (err) {
             // console.log("读取文件fail " + err);
