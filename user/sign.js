@@ -92,6 +92,42 @@ exports.login = function (req, res, next) {
 
 
 };
+exports.updatepass = function (req, res, next) {
+    var loginname = validator.trim(req.body.name).toLowerCase();
+    var pass = validator.trim(req.body.pass);
+    var newpass = validator.trim(req.body.newpass);
+
+    var ep = new eventproxy();
+
+    ep.fail(next);
+
+    if (!loginname || !pass) {
+        res.status(422);
+        return res.json({msg: 'lack info', content: '信息不完整'});
+    }
+    ep.on('login_error', function (login_error) {
+        res.json({msg: 'error', content: login_error});
+    });
+    /**
+     * UPDATE  `users` SET  `pwd` =  'dengyi12345' WHERE  `name` =  'dengyi' AND  `pwd` =  'dengyi123456'
+     * @type {string}
+     */
+    var updateSql = 'update users set pwd = ? where name= ? and pwd = ? ';
+    var updateParams = [newpass,loginname, pass];
+    conn.query(updateSql, updateParams, function (err, rows, fields) {
+        if (err) {
+            return res.json({msg: 'error', content: '用户名或密码错误'});
+        }
+        if (rows.changedRows >= 1) {
+            return res.json({msg: 'success',name: loginname, content: '更改成功'});
+
+        } else {
+            ep.emit('login_error','用户名或密码错误');
+        }
+    });
+
+
+};
 //提交注册信息
 epSql.on('doInsert', function (userInfo) {
     updateUser.insertUser(userInfo);
